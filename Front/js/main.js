@@ -4,6 +4,12 @@ const resultDiv = document.getElementById("result");
 
 const API_URL = "http://localhost:3000";
 
+// Si ya hay usuario logueado, redirigir automáticamente
+const existingUser = localStorage.getItem("loggedUser");
+if (existingUser) {
+  window.location.href = "inbox.html";
+}
+
 registerForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const username = document.getElementById("regUsername").value;
@@ -47,7 +53,10 @@ loginForm.addEventListener("submit", async (e) => {
 
     const data = await res.json();
     if (res.ok) {
-      // ✅ Redirige a inbox.html
+      // Guardar usuario en localStorage
+      localStorage.setItem("loggedUser", JSON.stringify(data.user));
+
+      // Redirigir a inbox.html
       window.location.href = "inbox.html";
     } else {
       resultDiv.textContent = data.message;
