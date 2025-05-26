@@ -1,0 +1,18 @@
+### Registro de usuario
+POST http://localhost:3000/register
+Content-Type: application/json
+
+{
+  "username": "camilo",
+  "email": "camilo@correo.com",
+  "password": "123456"
+}
+
+### Login con email
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "email": "camilo@correo.com",
+  "password": "123456"
+}
