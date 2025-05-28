@@ -1,5 +1,5 @@
 ### Registro de usuario
-POST http://localhost:3000/register
+POST http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
@@ -9,10 +9,27 @@ Content-Type: application/json
 }
 
 ### Login con email
-POST http://localhost:3000/login
+POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
   "email": "camilo@correo.com",
   "password": "123456"
 }
+
+### Enviar un correo
+POST http://localhost:3000/mails/send
+Content-Type: application/json
+
+{
+  "sender": "camilo@gmail.com",
+  "receiver": "laura@correo.com",
+  "subject": "Hola Laura",
+  "content": "Este es un correo de prueba enviado desde la red LAN."
+}
+
+### Ver bandeja de entrada de laura@correo.com
+GET http://localhost:3000/mails/inbox/laura@correo.com
+
+### Ver correos enviados por camilo@correo.com
+GET http://localhost:3000/mails/sent/camilo@gmail.com
