@@ -1,10 +1,10 @@
 // inbox.js
 import { getUser, logout, redirectIfNotLogged } from "./session.js";
+import { API_URL } from './config.js';
 
 redirectIfNotLogged();
 
 const user = getUser();
-const API_URL = 'http://localhost:3000';
 
 // Elementos del DOM
 const welcomeMessage = document.getElementById("welcomeMessage");

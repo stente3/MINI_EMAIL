@@ -1,5 +1,5 @@
 // auth.js
-const API_URL = "http://localhost:3000";
+import { API_URL } from './config.js';
 
 const registerForm = document.getElementById("registerForm");
 const loginForm = document.getElementById("loginForm");
