@@ -87,6 +87,18 @@ Por debajo, cada petición a la API es manejada por una ruta definida en el serv
 
 El front-end se comunica con el back-end mediante **peticiones HTTP** usando `fetch`. Por ejemplo, para iniciar sesión, se envía una solicitud `POST` con los datos del usuario y el servidor responde si son válidos o no.
 
+Puedes agregar el siguiente párrafo justo después:
+
+> Para facilitar esta comunicación y evitar repetir la URL del servidor en múltiples archivos, el front-end utiliza un archivo `.env` que contiene una variable que dice en donde se encuentra el back-end
+
+Ejemplo:
+
+> ```env
+> VITE_API_URL=http://localhost:3000
+> ```
+>
+> Esta variable se usa en el código para construir dinámicamente las rutas de la API. Esto mejora el mantenimiento del proyecto y permite modificar fácilmente la URL del servidor si cambia en el futuro (por ejemplo, al desplegar la aplicación).
+
 ---
 
 ## 📄 ¿Qué es un archivo JSON?
@@ -100,6 +112,29 @@ Un archivo `.json` es un formato ligero de intercambio de datos. Se utiliza tant
   "password": "contraseña"
 }
 ```
+
+---
+
+### 🌐 ¿Qué es CORS (Cross-Origin Resource Sharing)?
+
+**CORS** es un mecanismo de seguridad implementado en los navegadores para restringir o permitir las solicitudes que se hacen entre diferentes **orígenes** (dominios, protocolos o puertos). Por defecto, por razones de seguridad, los navegadores bloquean las solicitudes HTTP que provienen de un origen diferente al del servidor.
+
+Por ejemplo, si tu front-end se sirve desde `http://localhost:5173` y tu back-end desde `http://localhost:3000`, el navegador considera que están en **orígenes distintos**, por lo que bloqueará las solicitudes a menos que el servidor permita explícitamente ese acceso.
+
+Para permitir estas solicitudes, el servidor debe incluir cabeceras específicas, como:
+
+```http
+Access-Control-Allow-Origin: http://localhost:5173
+```
+
+En aplicaciones Node.js con Express, se puede usar el paquete `cors` para manejar esto fácilmente:
+
+```js
+const cors = require("cors");
+app.use(cors());
+```
+
+> En este proyecto, CORS se habilita para que el **front-end pueda comunicarse con el back-end** sin que el navegador bloquee las peticiones.
 
 ---
 
@@ -157,6 +192,16 @@ MINI_EMAIL/
 ### 📨 Envío de Correos
 
 - Formulario para enviar mensajes a otros usuarios registrados.
+
+#### 📧 Validación de Usuario al Enviar Correos
+
+Una funcionalidad importante de esta aplicación es la **verificación de la existencia del usuario receptor** antes de enviar un correo. Esto significa que:
+
+- Cuando un usuario intenta enviar un mensaje, el servidor primero **comprueba si el destinatario está registrado** en el sistema (es decir, si existe en el archivo `users.json`).
+- Si el destinatario **no existe**, el correo **no se envía** y se muestra un mensaje de error.
+- Esta validación evita que se pierdan mensajes o se almacenen correos con receptores inválidos.
+
+Esta lógica mejora la integridad de los datos y garantiza que todos los correos enviados tengan un destinatario válido dentro de la red LAN simulada.
 
 ### 📌 Estructura de cada Correo
 
