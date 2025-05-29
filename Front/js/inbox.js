@@ -140,11 +140,17 @@ sendMailForm.addEventListener('submit', async (e) => {
       body: JSON.stringify(mailData)
     });
 
+    const data = await response.json();
+
     if (response.ok) {
       sendMailForm.reset();
       showSection(mailList);
     } else {
-      alert('Error al enviar el correo');
+      if (data.code === 'RECEIVER_NOT_FOUND') {
+        alert('El destinatario no existe en el sistema. Por favor, verifica el correo electrónico.');
+      } else {
+        alert(data.error || 'Error al enviar el correo');
+      }
     }
   } catch (error) {
     console.error('Error al enviar el correo:', error);
