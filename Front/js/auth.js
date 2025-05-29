@@ -1,5 +1,5 @@
 // auth.js
-const API_URL = "http://localhost:3000"; // Ajusta si tu backend cambia
+const API_URL = "http://localhost:3000";
 
 const registerForm = document.getElementById("registerForm");
 const loginForm = document.getElementById("loginForm");

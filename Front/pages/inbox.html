@@ -5,11 +5,53 @@
     <title>Bandeja de Entrada</title>
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <script type="module" src="../js/inbox.js" defer></script>
-    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/inbox.css" />
   </head>
   <body>
-    <h1>📥 Bandeja de Entrada</h1>
-    <p id="welcomeMessage"></p>
-    <button id="logoutBtn">Cerrar sesión</button>
+    <header>
+      <h1>📥 Mini Email</h1>
+      <p id="welcomeMessage"></p>
+      <button id="logoutBtn">Cerrar sesión</button>
+    </header>
+
+    <main>
+      <nav>
+        <button id="inboxBtn" class="active">Bandeja de Entrada</button>
+        <button id="sentBtn">Enviados</button>
+        <button id="newMailBtn">Nuevo Correo</button>
+      </nav>
+
+      <section id="mailList" class="active">
+        <div class="section-header">
+          <h2>Correos Recibidos</h2>
+          <button id="refreshBtn" title="Actualizar bandeja de entrada">🔄</button>
+        </div>
+        <div id="inboxMails"></div>
+      </section>
+
+      <section id="sentMails">
+        <h2>Correos Enviados</h2>
+        <div id="sentMailsList"></div>
+      </section>
+
+      <section id="newMailForm">
+        <h2>Nuevo Correo</h2>
+        <form id="sendMailForm">
+          <div>
+            <label for="receiver">Para:</label>
+            <input type="email" id="receiver" required>
+          </div>
+          <div>
+            <label for="subject">Asunto:</label>
+            <input type="text" id="subject" required>
+          </div>
+          <div>
+            <label for="content">Mensaje:</label>
+            <textarea id="content" required></textarea>
+          </div>
+          <button type="submit">Enviar</button>
+        </form>
+      </section>
+    </main>
   </body>
 </html>
