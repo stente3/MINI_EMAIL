@@ -1,30 +1,171 @@
+:root {
+  --bg-color: #0f0f11;
+  --surface-color: #1b1b1e;
+  --primary-color: #ffffff;
+  --accent-color: #6c63ff;
+  --accent-hover: #5752d8;
+  --text-muted: #999;
+  --error-color: #ff6b6b;
+  --success-color: #4dd0e1;
+  --border-radius: 10px;
+  --transition: all 0.3s ease;
+  --shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Fondo general */
 body {
-  font-family: sans-serif;
-  max-width: 600px;
-  margin: auto;
-  padding: 2rem;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-color);
+  color: var(--primary-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+  min-height: 100vh;
 }
 
+/* Contenedor igual para ambos formularios */
 form {
-  margin-bottom: 2rem;
-}
-
-input {
-  display: block;
+  background: var(--surface-color);
   width: 100%;
+  max-width: 500px;
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 2rem;
+  animation: fadeIn 0.5s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Título principal */
+h1 {
+  font-size: 2.4rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  background:#5752d8;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+}
+
+h1::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--accent-color);
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
+}
+
+/* Título secundario */
+h2 {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 500;
   margin-bottom: 1rem;
-  padding: 0.5rem;
+  color: var(--primary-color);
+  letter-spacing: 0.5px;
+  opacity: 0.9;
 }
 
+/* Inputs */
+input {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--border-radius);
+  background-color: rgba(255, 255, 255, 0.03);
+  color: var(--primary-color);
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+input::placeholder {
+  color: var(--text-muted);
+}
+
+input:focus {
+  border-color: var(--accent-color);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.2);
+}
+
+/* Botón */
 button {
-  padding: 0.5rem 1rem;
+  width: 100%;
+  padding: 0.9rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: var(--accent-color);
+  color: #fff;
+  border: none;
+  border-radius: var(--border-radius);
   cursor: pointer;
+  transition: var(--transition);
 }
 
+button:hover {
+  background-color: var(--accent-hover);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* Mensajes */
 .message {
-  color: green;
+  text-align: center;
+  font-weight: 500;
+  font-size: 0.95rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: var(--border-radius);
 }
 
-.error {
-  color: red;
+.message.success {
+  background-color: rgba(77, 208, 225, 0.1);
+  color: var(--success-color);
+  border: 1px solid var(--success-color);
+}
+
+.message.error {
+  background-color: rgba(255, 107, 107, 0.1);
+  color: var(--error-color);
+  border: 1px solid var(--error-color);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  form {
+    padding: 1.5rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.15rem;
+  }
+
+  input, button {
+    font-size: 0.95rem;
+  }
 }
